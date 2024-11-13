@@ -140,3 +140,59 @@ class Instructor implements Human {
         console.log('Hello!');
     }
 }
+
+// readonly
+interface Car {
+    readonly carNumber: string;
+    carModel: string;
+}
+
+const myCar : Car = {
+    carNumber: 'MH 04 6543',
+    carModel: 'Audi'
+};
+
+// myCar.carNumber = 'MH 04 9343'; // cannot modify once assigned value
+myCar.carModel = 'BMW';
+
+// Multiple interfaces
+interface personName {
+    name: string;
+}
+
+interface personAge {
+    age: number
+}
+
+let myInterface: personName & personAge = {
+    name: 'Sid',
+    age: 24
+}
+
+// OR
+
+type details = personName & personAge;
+
+let myInterface2: details = {
+    name: 'Sid',
+    age: 24
+}
+
+// enum
+enum WeekDays {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday
+}
+
+let w: WeekDays = WeekDays.Wednesday;
+// to display value
+console.log(w); // 2
+console.log(WeekDays[w]); // Wednesday
+
+// Type assertion (type casting)
+let sv: any = "This is String";
+let sl: number = (<string>sv).length;
+console.log(sv, sl);
