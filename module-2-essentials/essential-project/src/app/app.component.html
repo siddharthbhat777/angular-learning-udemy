@@ -1,18 +1,11 @@
 <app-header />
 <main>
     <ul id="users">
-        <li>
-            <app-user [user]="users[0]" (select)="onSelectUser($event)" /> <!-- Similar to calling component and passing values with props -->
-        </li>
-        <li>
-            <app-user [user]="users[1]" (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [user]="users[2]" (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [user]="users[3]" (select)="onSelectUser($event)" />
-        </li>
+        @for (user of users; track user.id) { <!-- its like map function and track is something like "key" in map function -->
+            <li>
+                <app-user [user]="user" (select)="onSelectUser($event)" /> <!-- Similar to calling component and passing values with props -->
+            </li>
+        }
     </ul>
     <app-tasks [name]="selectedUser?.name" />
 </main>
