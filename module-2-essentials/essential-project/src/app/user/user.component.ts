@@ -1,4 +1,4 @@
-import { Component, computed, input, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -7,18 +7,16 @@ import { Component, computed, input, Input } from '@angular/core';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string; // @Input decorator basically used to accept props passed by parent component
+  @Input({ required: true }) name!: string;
+  @Output() select = new EventEmitter(); // send data to parent component
 
-  // @Input({ required: true }) avatar!: string; // @Input decorator basically used to accept props passed by parent component
-  // @Input({ required: true }) name!: string;
-  avatar = input.required<string>();
-  name = input.required<string>();
-
-  imagePath = computed(() => 'assets/users/' + this.avatar());
-
-  /* get imagePath() {
+  get imagePath() {
     return 'assets/users/' + this.avatar;
-  } */
+  }
 
   onSelectUser() {
+    this.select.emit(this.id);
   }
 }
