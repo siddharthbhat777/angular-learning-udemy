@@ -1,5 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/* type User = { // any type can be defined
+  id: string;
+  avatar: string;
+  name: string;
+} */
+
+interface User { // only object types can be defined
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -7,16 +19,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string; // @Input decorator basically used to accept props passed by parent component
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user!: User; // @Input decorator basically used to accept props passed by parent component
   @Output() select = new EventEmitter<string>(); // created output variable
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
 
   onSelectUser() {
-    this.select.emit(this.id); // with output variable sending(emitting) data to parent component
+    this.select.emit(this.user.id); // with output variable sending(emitting) data to parent component
   }
 }
