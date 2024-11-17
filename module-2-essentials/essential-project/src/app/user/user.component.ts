@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { type User } from './user.model';
 
 /* type User = { // any type can be defined
   id: string;
@@ -6,11 +7,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   name: string;
 } */
 
-interface User { // only object types can be defined
+/* interface User { // only object types can be defined
   id: string;
   avatar: string;
   name: string;
-}
+} */
 
 @Component({
   selector: 'app-user',
