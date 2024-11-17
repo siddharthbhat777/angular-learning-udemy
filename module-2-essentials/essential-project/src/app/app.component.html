@@ -3,7 +3,7 @@
     <ul id="users">
         @for (user of users; track user.id) { <!-- its like map function and track is something like "key" in map function -->
             <li>
-                <app-user [user]="user" (select)="onSelectUser($event)" /> <!-- Similar to calling component and passing values with props -->
+                <app-user [user]="user" [selected]="user.id === selectedUserId" (select)="onSelectUser($event)" /> <!-- Similar to calling component and passing values with props -->
             </li>
         }
     </ul>

@@ -20,6 +20,7 @@ import { type User } from './user.model';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  @Input({ required: true }) selected!: boolean;
   @Input({ required: true }) user!: User; // @Input decorator basically used to accept props passed by parent component
   @Output() select = new EventEmitter<string>(); // created output variable
 
