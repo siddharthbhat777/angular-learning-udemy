@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { type User } from './user.model';
+import { CardComponent } from "../shared/card/card.component";
 
 /* type User = { // any type can be defined
   id: string;
@@ -17,7 +18,8 @@ import { type User } from './user.model';
   selector: 'app-user',
   standalone: true,
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
+  imports: [CardComponent]
 })
 export class UserComponent {
   @Input({ required: true }) selected!: boolean;
