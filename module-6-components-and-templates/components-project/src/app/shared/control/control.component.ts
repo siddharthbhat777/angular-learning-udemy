@@ -8,9 +8,17 @@ import { Component, input, ViewEncapsulation } from '@angular/core';
   styleUrl: './control.component.css',
   encapsulation: ViewEncapsulation.None, // for adding input, textarea styles which will be loaded
   host: {
-    class: 'control'
+    class: 'control',
+    '(click)': 'onClick()'
   }
 })
 export class ControlComponent {
+  // @HostBinding('class') className = 'control'; // class: control alternative
+  /* @HostListener('click') onClick() { // click event alternative
+    console.log('Clicked!');
+  } */
   label = input.required<string>();
+  onClick() {
+    console.log('Clicked!');
+  }
 }
