@@ -1,4 +1,4 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -18,7 +18,11 @@ export class ControlComponent {
     console.log('Clicked!');
   } */
   label = input.required<string>();
+  // Accessing parent element info
+  private el = inject(ElementRef); // dependency injection instead of using constructor way
+
   onClick() {
     console.log('Clicked!');
+    console.log(this.el);
   }
 }
