@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-rect',
@@ -8,9 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './rect.component.css',
 })
 export class RectComponent {
-  // Todo: Implement custom two-way binding
+  // Implemented custom two-way binding
+  @Input({ required: true }) size!: { width: string; height: string; };
+  @Output() sizeChange = new EventEmitter<{ width: string; height: string; }>(); 
+  // naming is critical here for output for two-way binding it should be "<input_variable_name>Change"
 
   onReset() {
-    // ...
+    this.sizeChange.emit({
+      width: '200',
+      height: '100'
+    });
   }
 }
