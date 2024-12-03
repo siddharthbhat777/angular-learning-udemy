@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewTicketComponent {
   // @ViewChild('formTemplate') form?: ElementRef<HTMLFormElement>; // old way
+  // @ViewChildren(ButtonComponent) btn .... // for multiple elements
   private form = viewChild.required<ElementRef<HTMLFormElement>>('formTemplate');
 
   onSubmit(title: string, text: string) {
