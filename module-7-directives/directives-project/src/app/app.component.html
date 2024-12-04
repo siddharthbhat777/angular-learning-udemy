@@ -8,5 +8,9 @@
   <!-- @if (isAdmin()) {
     <p>Only admins should see this!</p>
   } -->
-  <p appAuth="admin">Only admins should see this!</p>
+    <!-- ng-template by default hides the element and show up on screen when you tells it -->
+     <!-- * in *ngIf is ng-template -->
+    <ng-template appAuth="admin">
+      <p>Only admins should see this!</p>
+    </ng-template>
 </main>
