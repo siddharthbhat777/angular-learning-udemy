@@ -10,17 +10,17 @@ import { MessagesService } from '../messages.service';
 })
 export class MessagesListComponent implements OnInit {
   private messagesService = inject(MessagesService);
-  private cdRef = inject(ChangeDetectorRef);
-  private destroyRef = inject(DestroyRef);
+  private cdRef = inject(ChangeDetectorRef); // available variable for manual external change notification
+  private destroyRef = inject(DestroyRef); // cleanup variable
 
   messages: string[] = [];
 
   ngOnInit() {
-      const subscription = this.messagesService.messages$.subscribe((messages) => {
-        this.messages = messages;
-        this.cdRef.markForCheck();
+      const subscription = this.messagesService.messages$.subscribe((messages) => { // returns updated messages list
+        this.messages = messages; // setting updated message list
+        this.cdRef.markForCheck(); // detect the change and confirm it
       });
-      this.destroyRef.onDestroy(() => {
+      this.destroyRef.onDestroy(() => { // cleaning up subscriptions after use
         subscription.unsubscribe();
       });
   }

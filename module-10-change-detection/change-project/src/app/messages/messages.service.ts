@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root',
 })
 export class MessagesService {
-    messages$ = new BehaviorSubject<string[]>([]);
+    messages$ = new BehaviorSubject<string[]>([]); // creating rxjs variable
     private messages: string[] = [];
     get allMessages() {
         return [...this.messages];
@@ -13,6 +13,6 @@ export class MessagesService {
 
     addMessage(message: string) {
         this.messages = [...this.messages, message];
-        this.messages$.next([...this.messages]);
+        this.messages$.next([...this.messages]); // changing rxjs variable to notify message-list
     }
 }
