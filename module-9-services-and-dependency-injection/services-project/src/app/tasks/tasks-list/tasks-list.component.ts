@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 
 import { TaskItemComponent } from './task-item/task-item.component';
-import { TasksService } from '../tasks.service';
 import { TasksServiceToken } from '../../../main';
+import { TaskStatusOptionsProvider } from '../task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -10,6 +10,7 @@ import { TasksServiceToken } from '../../../main';
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.css',
   imports: [TaskItemComponent],
+  providers: [TaskStatusOptionsProvider]
 })
 export class TasksListComponent {
   private tasksService = inject(TasksServiceToken);
