@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MessagesService } from '../messages.service';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-messages-list',
   standalone: true,
   templateUrl: './messages-list.component.html',
   styleUrl: './messages-list.component.css',
-  imports: [AsyncPipe],
+  // imports: [AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessagesListComponent {
   private messagesService = inject(MessagesService);
-  messages$ = this.messagesService.messages$; // alternative to whole below commented code
+  messages = this.messagesService.allMessages;
+  // messages$ = this.messagesService.messages$; // alternative to whole below commented code
 
   /* private cdRef = inject(ChangeDetectorRef); // available variable for manual external change notification
   private destroyRef = inject(DestroyRef); // cleanup variable
