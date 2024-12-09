@@ -1,6 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -9,26 +9,26 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css'
 })
-export class UserTasksComponent {
+export class UserTasksComponent implements OnInit {
   // new way
-  userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
+  // userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
   private usersService = inject(UsersService);
 
   // old way
-  // userName = '';
-  // private activatedRoute = inject(ActivatedRoute);
-  // private destroyRef = inject(DestroyRef);
+  userName = '';
+  private activatedRoute = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
 
   // new way
-  userName = computed(() => this.usersService.users.find(u => u.id === this.userId())?.name);
+  // userName = computed(() => this.usersService.users.find(u => u.id === this.userId())?.name);
 
   // old way
-  /* ngOnInit(): void {
+  ngOnInit(): void {
       const subscription = this.activatedRoute.paramMap.subscribe({
         next: paramMap => {
           this.userName = this.usersService.users.find(u => u.id === paramMap.get('userId'))?.name || '';
         }
       });
       this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  } */
+  }
 }
