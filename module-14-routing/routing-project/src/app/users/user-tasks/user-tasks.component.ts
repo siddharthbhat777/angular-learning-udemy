@@ -13,6 +13,7 @@ export class UserTasksComponent {
   // new way
   userId = input.required<string>();
   private usersService = inject(UsersService);
+  
   // old way
   // userName = '';
   // private activatedRoute = inject(ActivatedRoute);
