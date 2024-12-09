@@ -11,7 +11,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class UserTasksComponent {
   // new way
-  userId = input.required<string>();
+  userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
   private usersService = inject(UsersService);
 
   // old way
