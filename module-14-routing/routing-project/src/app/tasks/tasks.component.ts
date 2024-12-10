@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class TasksComponent {
   userId = input.required<string>();
+  order = input<'asc' | 'desc'>(); // input variable name should be same as query parameter key
   private tasksService = inject(TasksService);
   userTasks = computed(() => this.tasksService.allTasks().filter((task) => task.userId === this.userId()));
 }
