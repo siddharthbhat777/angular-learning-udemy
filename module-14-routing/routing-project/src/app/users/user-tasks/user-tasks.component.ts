@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
@@ -10,9 +10,10 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './user-tasks.component.css'
 })
 export class UserTasksComponent implements OnInit {
+  private usersService = inject(UsersService);
   // new way
   // userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
-  private usersService = inject(UsersService);
+  message = input.required<string>();
 
   // old way
   userName = '';
@@ -24,11 +25,13 @@ export class UserTasksComponent implements OnInit {
 
   // old way
   ngOnInit(): void {
-      const subscription = this.activatedRoute.paramMap.subscribe({
-        next: paramMap => {
-          this.userName = this.usersService.users.find(u => u.id === paramMap.get('userId'))?.name || '';
-        }
-      });
-      this.destroyRef.onDestroy(() => subscription.unsubscribe());
+    console.log('Input data: ' + this.message());
+    
+    const subscription = this.activatedRoute.paramMap.subscribe({
+      next: paramMap => {
+        this.userName = this.usersService.users.find(u => u.id === paramMap.get('userId'))?.name || '';
+      }
+    });
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }
