@@ -1,6 +1,6 @@
-import { Component, DestroyRef, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterLink, RouterOutlet, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, RouterLink, RouterOutlet, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -15,6 +15,16 @@ export class UserTasksComponent {
   // new way
   // userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
   message = input.required<string>(); // message is and should be same name as key in data
+
+  // getting both data together or old approach
+  /* private activatedRoute = inject(ActivatedRoute);
+  ngOnInit() {
+    this.activatedRoute.data.subscribe({
+      next: data => {
+        console.log(data);
+      }
+    });
+  } */
 
   // old way
   // userName = '';
