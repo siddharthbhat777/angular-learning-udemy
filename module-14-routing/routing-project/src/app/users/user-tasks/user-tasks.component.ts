@@ -13,7 +13,7 @@ export class UserTasksComponent implements OnInit {
   private usersService = inject(UsersService);
   // new way
   // userId = input.required<string>(); // input variable name must be same as you mentioned dynamic route name in routing file
-  message = input.required<string>();
+  message = input.required<string>(); // message is and should be same name as key in data
 
   // old way
   userName = '';
