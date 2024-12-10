@@ -1,6 +1,6 @@
 <section id="tasks">
   <header>
-    <h2>{{ userName }} Tasks</h2>
+    <h2>{{ userName() }} Tasks</h2>
     <menu>
       <!-- This is relative path, full path like this /users/:userId/tasks/new will also work here but for that you will need to get id seperately, so instead you can put relative path like this -->
       <a routerLink="tasks/new">Add Task</a>
