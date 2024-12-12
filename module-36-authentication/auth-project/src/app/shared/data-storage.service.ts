@@ -23,15 +23,9 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    return this.authService.user.pipe(
-      take(1), // with take(1) we are telling angular that give us 1st response only and then unsubscribe
-      exhaustMap(user => { // exhaustMap take observable value passed by take(1) and forwards it
-        return this.http.get<Recipe[]>(
-          'https://telempathy-e3793-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json', {
-            params: new HttpParams().set('auth', user.token)
-          }
-        )
-      }),
+    return this.http.get<Recipe[]>(
+      'https://telempathy-e3793-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json'
+    ).pipe(
       map(recipes => {
         return recipes.map(recipe => {
           return {
