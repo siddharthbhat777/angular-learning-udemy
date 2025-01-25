@@ -6,6 +6,7 @@ import { counterReducer } from './app/store/counter.reducer';
 
 bootstrapApplication(AppComponent, {
     providers: [provideStore({
+        // auth: authreducer, // can add multiple reducers
         counter: counterReducer
     })]
 });
