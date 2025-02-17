@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { AsyncValidatorFn, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AppComponent implements OnInit {
   genders = ['male', 'female'];
-  signupForm: FormGroup;
+  signupForm!: FormGroup;
   forbiddenUsernames = ['Chris', 'Anna'];
 
   get hobbyControls() {
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
         email: new FormControl(
           null,
           [Validators.required, Validators.email],
-          this.forbiddenEmails
+          this.forbiddenEmails as AsyncValidatorFn
         ),
       }),
       gender: new FormControl('male'),
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
     (<FormArray>this.signupForm.get('hobbies')).push(control);
   }
 
-  forbiddenNames(control: FormControl): { [s: string]: boolean } {
+  forbiddenNames(control: FormControl): { [key: string]: boolean } | null {
     if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
       return { nameIsForbidden: true };
     }
