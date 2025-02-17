@@ -6,13 +6,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
-  transform(value: any, propName: string): any {
-    return value.sort((a, b) => {
-      if (a[propName] > b[propName]) {
-        return 1;
-      } else {
-        return -1;
+  transform<T extends Record<string, any>>(value: T[], propName: keyof T): T[] {
+    if (!value || value.length === 0) {
+      return [];
+    }
+
+    return value.sort((a: T, b: T) => {
+      if (!a[propName] || !b[propName]) {
+        return 0; // Ignore items with missing properties
       }
+      
+      return a[propName] > b[propName] ? 1 : -1;
     });
   }
 

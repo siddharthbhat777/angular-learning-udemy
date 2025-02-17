@@ -22,7 +22,6 @@ import { LoggingService } from '../logging.service';
     DropdownDirective,
     CommonModule
   ],
-  entryComponents: [AlertComponent],
   providers: [LoggingService]
 })
 export class SharedModule {}

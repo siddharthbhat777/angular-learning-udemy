@@ -19,10 +19,10 @@ import { PlaceholderDirective } from '../shared/placeholder/placeholder.directiv
 export class AuthComponent implements OnDestroy {
   isLoginMode = true;
   isLoading = false;
-  error: string = null;
-  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  error: string | null = null;
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost!: PlaceholderDirective;
 
-  private closeSub: Subscription;
+  private closeSub!: Subscription;
 
   constructor(
     private authService: AuthService,

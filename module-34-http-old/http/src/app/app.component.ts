@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { Post } from './post.model';
@@ -14,8 +13,8 @@ import { PostsService } from './posts.service';
 export class AppComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
   isFetching = false;
-  error = null;
-  private errorSub: Subscription;
+  error: string | null = null;
+  private errorSub!: Subscription;
 
   constructor(private http: HttpClient, private postsService: PostsService) {}
 

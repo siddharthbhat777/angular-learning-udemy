@@ -11,8 +11,8 @@ import { LoggingService } from '../logging.service';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-  ingredients: Ingredient[];
-  private subscription: Subscription;
+  ingredients!: Ingredient[];
+  private subscription!: Subscription;
 
   constructor(
     private slService: ShoppingListService,

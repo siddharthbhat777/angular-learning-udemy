@@ -18,10 +18,10 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user = new BehaviorSubject<User>(null);
+  user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(email: string, password: string) {
     return this.http
@@ -70,15 +70,10 @@ export class AuthService {
   }
 
   autoLogin() {
-    const userData: {
-      email: string;
-      id: string;
-      _token: string;
-      _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData'));
-    if (!userData) {
-      return;
-    }
+    const userInfo = localStorage.getItem('userData');
+    if (!userInfo) return;
+
+    const userData = JSON.parse(userInfo);
 
     const loadedUser = new User(
       userData.email,
