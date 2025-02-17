@@ -9,14 +9,14 @@ import { UserService } from '../user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  id: number;
+  id!: number;
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
   }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params.id;
+      this.id = +params['id'];
     });
   }
 

@@ -9,7 +9,7 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private firstObsSubscription: Subscription;
+  private firstObsSubscription!: Subscription;
 
   constructor() {
   }
@@ -18,37 +18,42 @@ export class HomeComponent implements OnInit, OnDestroy {
     // this.firstObsSubscription = interval(1000).subscribe(count => {
     //   console.log(count);
     // });
-    const customIntervalObservable = Observable.create(observer => {
+    const customIntervalObservable = new Observable<number>((observer) => {
       let count = 0;
-      setInterval(() => {
+      const intervalId = setInterval(() => {
         observer.next(count);
         if (count === 5) {
           observer.complete();
+          clearInterval(intervalId); // Clear interval to avoid memory leaks
         }
         if (count > 3) {
-          observer.error(new Error('Count is greater 3!'));
+          observer.error(new Error('Count is greater than 3!'));
         }
         count++;
       }, 1000);
     });
 
-
-    this.firstObsSubscription = customIntervalObservable.pipe(filter(data => {
-      return data > 0;
-    }), map((data: number) => {
-      return 'Round: ' + (data + 1);
-    })).subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.log(error);
-      alert(error.message);
-    }, () => {
-      console.log('Completed!');
-    });
+    this.firstObsSubscription = customIntervalObservable.pipe(
+      filter((data: number) => data > 0), // Explicit type annotation
+      map((data: number) => 'Round: ' + (data + 1))
+    ).subscribe(
+      (data: string) => {
+        console.log(data);
+      },
+      (error: Error) => {
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        console.log('Completed!');
+      }
+    );
   }
 
   ngOnDestroy(): void {
-    this.firstObsSubscription.unsubscribe();
+    if (this.firstObsSubscription) {
+      this.firstObsSubscription.unsubscribe();
+    }
   }
 
 }

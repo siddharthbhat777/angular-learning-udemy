@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   userActivated = false;
-  private activatedSub: Subscription;
+  private activatedSub!: Subscription;
 
   constructor(private userService: UserService) {
   }
