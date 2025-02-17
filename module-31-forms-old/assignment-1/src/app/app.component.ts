@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 export class AppComponent {
   subscriptions = ['Basic', 'Advanced', 'Pro'];
   selectedSubscription = 'Advanced';
-  @ViewChild('signupForm', { static: false }) sgnForm: NgForm;
+  @ViewChild('signupForm', { static: false }) sgnForm!: NgForm;
   onSubmit() {
     console.log(this.sgnForm.value);
   }
